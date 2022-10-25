@@ -36,7 +36,7 @@ const App = (params) => {
     dispatch(taskDeleted(taskId));
   };
 
-  const createTask = async () => {
+  const createTask = () => {
     dispatch(createNewTask({ title: "Brand new task" }));
   };
 

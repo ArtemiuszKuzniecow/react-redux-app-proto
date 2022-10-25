@@ -54,14 +54,13 @@ export const loadTasks = () => async (dispatch) => {
 };
 
 export const createNewTask = (payload) => async (dispatch) => {
-  // dispatch(taskRequested());
-  // try {
-  const data = await todosService.post({ ...payload, completed: false });
-  //   dispatch(create(data));
-  // } catch (error) {
-  //   dispatch(taskRequestFailed());
-  //   dispatch(setError(error.message));
-  // }
+  try {
+    const data = await todosService.create({ ...payload, completed: false });
+    dispatch(create(data));
+  } catch (error) {
+    dispatch(taskRequestFailed());
+    dispatch(setError(error.message));
+  }
 };
 
 export const completeTask = (id) => (dispatch, getState) => {
