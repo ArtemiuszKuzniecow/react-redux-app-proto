@@ -10,7 +10,9 @@ import {
   loadTasks,
   taskDeleted,
   titleChanged,
+  createNewTask,
 } from "./store/task";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -34,6 +36,10 @@ const App = (params) => {
     dispatch(taskDeleted(taskId));
   };
 
+  const createTask = () => {
+    dispatch(createNewTask({ title: "Brand new task" }));
+  };
+
   if (isLoading) {
     return <h1>Loading</h1>;
   }
@@ -44,25 +50,33 @@ const App = (params) => {
 
   return (
     <>
-      <h1>App</h1>
+      <div className="container">
+        <div>
+          <h1>App</h1>
 
-      <ul>
-        {state.map((el) => {
-          return (
-            <li key={el.id}>
-              <p>{el.title}</p>
-              <p>{`Completed: ${el.completed}`}</p>
-              <button onClick={() => dispatch(completeTask(el.id))}>
-                Complete
-              </button>
-              <button onClick={() => changeTitle(el.id)}>Change title</button>
-              <button onClick={() => deleteTask(el.id)}>Delete</button>
-              <hr />
-            </li>
-          );
-        })}
-      </ul>
-      <button>Create Post</button>
+          <ul>
+            {state.map((el) => {
+              return (
+                <li key={el.id}>
+                  <p>{el.title}</p>
+                  <p>{`Completed: ${el.completed}`}</p>
+                  <button onClick={() => dispatch(completeTask(el.id))}>
+                    Complete
+                  </button>
+                  <button onClick={() => changeTitle(el.id)}>
+                    Change title
+                  </button>
+                  <button onClick={() => deleteTask(el.id)}>Delete</button>
+                  <hr />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <button className="btn" onClick={createTask}>
+          Create Post
+        </button>
+      </div>
     </>
   );
 };
